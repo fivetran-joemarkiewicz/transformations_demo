@@ -1,0 +1,54 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'myproject'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'fivetran'
+
+# These configurations specify where dbt should look for different types of files.
+# The `source-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+source-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+data-paths: ["data"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+    - "target"
+    - "dbt_modules"
+
+vars:
+    ad_reporting__microsoft_ads_enabled: False
+    ad_reporting__linkedin_ads_enabled: False
+    ad_reporting__google_ads_enabled: False
+ 
+    pinterest_schema: pinterest
+    twitter_ads_schema: twitter_ads
+    facebook_ads_schema: facebook_ads_dbt
+    snapchat_schema: snapchat_ads
+
+models:
+    # disable both microsoft ads models if not using microsoft ads
+    microsoft_ads:
+        enabled: false
+    microsoft_ads_source:
+        enabled: false
+    
+    # disable both linkedin ads models if not using linkedin ads
+    linkedin:
+        enabled: false
+    linkedin_source:
+        enabled: false
+    
+    # disable both google ads models if not using google ads
+    google_ads:
+        enabled: false
+    google_ads_source:
+        enabled: false
